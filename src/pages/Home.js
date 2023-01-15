@@ -16,6 +16,14 @@ const Loading = styled.div`
   }
 `;
 
+const Wrapper = styled.div`
+  h1 {
+    margin-left: 100px;
+    margin-top: 20px;
+    font-size: 30px;
+  }
+`;
+
 const Home = () => {
   const dispatch = useDispatch();
   const { popularMovies, topRatedMovies, upcomingMovies, loading } =
@@ -35,15 +43,15 @@ const Home = () => {
       </Loading>
     );
   return (
-    <div>
+    <Wrapper className="Wrapper">
       <Banner movie={popularMovies.results[0]} />
       <h1>Popular Movies</h1>
-      <MovieSlide />
+      <MovieSlide movies={popularMovies} />
       <h1>Top Rated Movies</h1>
-      <MovieSlide />
+      <MovieSlide movies={topRatedMovies} />
       <h1>Upcoming Movies</h1>
-      <MovieSlide />
-    </div>
+      <MovieSlide movies={upcomingMovies} />
+    </Wrapper>
   );
 };
 
