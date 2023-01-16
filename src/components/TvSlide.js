@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
-import MovieCard from "./MovieCard";
+import TvCard from "./TvCard";
 
 const Wrapper = styled.div`
   overflow-x: hidden;
@@ -44,7 +44,7 @@ const Next = styled.div`
   right: 0;
 `;
 
-const MovieSlide = ({ movies }) => {
+const TvSlide = ({ tvShows }) => {
   const [scrollX, setScrollX] = useState(0);
   const [count, setCount] = useState(0);
   const slideWidth = window.innerWidth - 260;
@@ -80,15 +80,15 @@ const MovieSlide = ({ movies }) => {
           style={{
             marginLeft: scrollX,
             width:
-              movies.results.length * cardWidth +
-              movies.results.length * 10 +
+              tvShows.results.length * cardWidth +
+              tvShows.results.length * 10 +
               100,
             height: cardWidth * 0.6,
           }}
         >
-          {movies.results.length > 0 &&
-            movies.results.map((item, index) => (
-              <MovieCard key={index} movie={item} width={cardWidth} />
+          {tvShows.results.length > 0 &&
+            tvShows.results.map((item, index) => (
+              <TvCard key={index} tvShow={item} width={cardWidth} />
             ))}
         </Slide>
       </Carousel>
@@ -96,4 +96,4 @@ const MovieSlide = ({ movies }) => {
   );
 };
 
-export default MovieSlide;
+export default TvSlide;

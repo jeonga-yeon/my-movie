@@ -16,8 +16,8 @@ const Wrapper = styled.div`
   }
 `;
 
-const MovieCard = ({ movie, width }) => {
-  const { movieGenreList } = useSelector((state) => state.movies);
+const TvCard = ({ tvShow, width }) => {
+  const { tvGenreList } = useSelector((state) => state.tvShows);
   return (
     <Wrapper
       style={{
@@ -25,27 +25,27 @@ const MovieCard = ({ movie, width }) => {
         width,
         backgroundImage:
           "url(" +
-          `https://www.themoviedb.org/t/p/w355_and_h200_multi_faces${movie.poster_path}` +
+          `https://www.themoviedb.org/t/p/w355_and_h200_multi_faces${tvShow.poster_path}` +
           ")",
         backgroundSize: "cover",
       }}
     >
       <div style={{ height: "100%", width }} className="overlay">
-        <h1>{movie.title}</h1>
+        <h1>{tvShow.title}</h1>
         <div>
-          {movie.genre_ids.map((id, index) => (
+          {tvShow.genre_ids.map((id, index) => (
             <span key={index}>
-              {movieGenreList.find((item) => item.id === id).name}
+              {tvGenreList.find((item) => item.id === id).name}
             </span>
           ))}
         </div>
         <div>
-          <span>{movie.vote_average}</span>
-          <span>{movie.adult ? "청불" : null}</span>
+          <span>{tvShow.vote_average}</span>
+          <span>{tvShow.adult ? "청불" : null}</span>
         </div>
       </div>
     </Wrapper>
   );
 };
 
-export default MovieCard;
+export default TvCard;

@@ -5,7 +5,9 @@ import Banner from "../components/Banner";
 import { getMoivesThunk } from "../redux/modules/movieSlice";
 import ClipLoader from "react-spinners/ClipLoader";
 import styled from "styled-components";
+import { getTvShowsThunk } from "../redux/modules/tvShowSlice";
 import MovieSlide from "../components/MovieSlide";
+import TvSlide from "../components/TvSlide";
 
 const Loading = styled.div`
   width: 100%;
@@ -22,14 +24,19 @@ const Wrapper = styled.div`
     margin-top: 20px;
     font-size: 30px;
   }
+  padding-bottom: 70px;
 `;
 
 const Home = () => {
   const dispatch = useDispatch();
   const { popularMovies, topRatedMovies, upcomingMovies, loading } =
     useSelector((state) => state.movies);
+  const { popularTvShows, topRatedTvShows } = useSelector(
+    (state) => state.tvShows
+  );
   useEffect(() => {
     dispatch(getMoivesThunk());
+    dispatch(getTvShowsThunk());
   }, []);
   if (loading)
     return (
@@ -51,6 +58,10 @@ const Home = () => {
       <MovieSlide movies={topRatedMovies} />
       <h1>Upcoming Movies</h1>
       <MovieSlide movies={upcomingMovies} />
+      <h1>Popular TV Shows</h1>
+      <TvSlide tvShows={popularTvShows} />
+      <h1>Top Rated TV Shows</h1>
+      <TvSlide tvShows={topRatedTvShows} />
     </Wrapper>
   );
 };

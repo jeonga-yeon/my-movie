@@ -19,23 +19,23 @@ export const getMoivesThunk = createAsyncThunk(
         `/movie/upcoming?api_key=${API_KEY}&language=en-US&page=1`
       );
 
-      const genreApi = api.get(
+      const movieGenreApi = api.get(
         `/genre/movie/list?api_key=${API_KEY}&language=en-US`
       );
 
-      const [popularMovies, topRatedMovies, upcomingMovies, genreList] =
+      const [popularMovies, topRatedMovies, upcomingMovies, movieGenreList] =
         await Promise.all([
           popularMoviesApi,
           topRatedApi,
           upcomingApi,
-          genreApi,
+          movieGenreApi,
         ]);
 
       return {
         popularMovies: popularMovies.data,
         topRatedMovies: topRatedMovies.data,
         upcomingMovies: upcomingMovies.data,
-        genreList: genreList.data.genres,
+        movieGenreList: movieGenreList.data.genres,
       };
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -47,7 +47,7 @@ let initialState = {
   popularMovies: {},
   topRatedMovies: {},
   upcomingMovies: {},
-  genreList: {},
+  movieGenreList: [],
   loading: true,
   error: null,
 };
@@ -65,7 +65,7 @@ const movies = createSlice({
         state.popularMovies = action.payload.popularMovies;
         state.topRatedMovies = action.payload.topRatedMovies;
         state.upcomingMovies = action.payload.upcomingMovies;
-        state.genreList = action.payload.genreList;
+        state.movieGenreList = action.payload.movieGenreList;
         state.loading = false;
       })
       .addCase(getMoivesThunk.rejected, (state, action) => {
