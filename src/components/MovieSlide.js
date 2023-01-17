@@ -8,6 +8,7 @@ const Wrapper = styled.div`
   overflow-x: hidden;
   margin: 0px 100px;
   margin-top: 20px;
+  overflow-y: hidden;
   &:hover {
     .btn {
       opacity: 1;
