@@ -7,9 +7,6 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 const Wrapper = styled.div`
   margin-right: 10px;
   border-radius: 1%;
-  &:hover {
-    scale: 1.3;
-  }
   .overlay {
     position: relative;
     box-sizing: border-box;

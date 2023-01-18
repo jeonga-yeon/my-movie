@@ -6,9 +6,10 @@ import TvCard from "./TvCard";
 
 const Wrapper = styled.div`
   position: relative;
+  display: flex;
+  align-items: center;
   overflow-x: hidden;
   margin: 0px 100px;
-  margin-top: 20px;
   overflow-y: hidden;
   z-index: 1;
   .btn {
@@ -29,7 +30,10 @@ const Wrapper = styled.div`
   }
 `;
 
-const Carousel = styled.div``;
+const Carousel = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
 const Slide = styled.div`
   transition: all ease 0.5s;
@@ -69,21 +73,21 @@ const TvSlide = ({ tvShows }) => {
   };
   return (
     <Wrapper>
-      <Prev className="btn" style={{ height: cardWidth * 0.6 }}>
+      <Prev className="btn" style={{ height: cardWidth * 0.7 }}>
         <FontAwesomeIcon
           className="btn__icon"
           icon={faAngleLeft}
           onClick={handleBtnLeftClick}
         />
       </Prev>
-      <Next className="btn" style={{ height: cardWidth * 0.6 }}>
+      <Next className="btn" style={{ height: cardWidth * 0.7 }}>
         <FontAwesomeIcon
           className="btn__icon"
           icon={faAngleRight}
           onClick={handleBtnRightClick}
         />
       </Next>
-      <Carousel style={{ height: cardWidth * 0.6 + 20 }}>
+      <Carousel style={{ height: cardWidth * 0.7 + 20 }}>
         <Slide
           style={{
             marginLeft: scrollX,
@@ -91,7 +95,7 @@ const TvSlide = ({ tvShows }) => {
               tvShows.results.length * cardWidth +
               tvShows.results.length * 10 +
               100,
-            height: cardWidth * 0.6,
+            height: cardWidth * 0.7,
           }}
         >
           {tvShows.results.length > 0 &&
