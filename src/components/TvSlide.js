@@ -5,28 +5,27 @@ import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import TvCard from "./TvCard";
 
 const Wrapper = styled.div`
+  position: relative;
   overflow-x: hidden;
   margin: 0px 100px;
   margin-top: 20px;
   overflow-y: hidden;
-  &:hover {
-    .btn {
-      opacity: 1;
-    }
-  }
   z-index: 1;
   .btn {
+    color: #ecf0f1;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 40px;
     position: absolute;
     overflow: hidden;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: transparent;
     z-index: 2;
     cursor: pointer;
-    opacity: 0;
     transition: all ease 0.6s;
+    .btn__icon {
+      font-size: 23px;
+    }
   }
 `;
 
@@ -71,10 +70,18 @@ const TvSlide = ({ tvShows }) => {
   return (
     <Wrapper>
       <Prev className="btn" style={{ height: cardWidth * 0.6 }}>
-        <FontAwesomeIcon icon={faAngleLeft} onClick={handleBtnLeftClick} />
+        <FontAwesomeIcon
+          className="btn__icon"
+          icon={faAngleLeft}
+          onClick={handleBtnLeftClick}
+        />
       </Prev>
       <Next className="btn" style={{ height: cardWidth * 0.6 }}>
-        <FontAwesomeIcon icon={faAngleRight} onClick={handleBtnRightClick} />
+        <FontAwesomeIcon
+          className="btn__icon"
+          icon={faAngleRight}
+          onClick={handleBtnRightClick}
+        />
       </Next>
       <Carousel style={{ height: cardWidth * 0.6 + 20 }}>
         <Slide
