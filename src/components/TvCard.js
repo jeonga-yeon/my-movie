@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 const Wrapper = styled.div`
   margin-right: 10px;
@@ -60,9 +61,11 @@ const Wrapper = styled.div`
 `;
 
 const TvCard = ({ tvShow, width }) => {
+  const navigate = useNavigate();
   const { tvGenreList } = useSelector((state) => state.tvShows);
   return (
     <Wrapper
+      onClick={() => navigate(`/tvshows/${tvShow.id}`)}
       style={{
         height: "100%",
         width,
