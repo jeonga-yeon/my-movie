@@ -3,8 +3,8 @@ import api from "../api";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
-export const getDetailThunk = createAsyncThunk(
-  "detail/getDetailThunk",
+export const getMovieDetailThunk = createAsyncThunk(
+  "movieDetail/getMovieDetailThunk",
   async (id, thunkAPI) => {
     try {
       const movieDetailApi = await api.get(
@@ -31,14 +31,14 @@ const movie = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getDetailThunk.pending, (state) => {
+      .addCase(getMovieDetailThunk.pending, (state) => {
         state.loading = true;
       })
-      .addCase(getDetailThunk.fulfilled, (state, action) => {
+      .addCase(getMovieDetailThunk.fulfilled, (state, action) => {
         state.movieDetail = action.payload;
         state.loading = false;
       })
-      .addCase(getDetailThunk.rejected, (state, action) => {
+      .addCase(getMovieDetailThunk.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error;
       });

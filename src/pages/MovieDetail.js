@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import { getDetailThunk } from "../redux/modules/movieDetailSlice";
+import { getMovieDetailThunk } from "../redux/modules/movieDetailSlice";
 import ClipLoader from "react-spinners/ClipLoader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faUsers } from "@fortawesome/free-solid-svg-icons";
@@ -129,7 +129,7 @@ const MovieDetail = () => {
   const dispatch = useDispatch();
   const { movieDetail, loading } = useSelector((state) => state.movie);
   useEffect(() => {
-    dispatch(getDetailThunk(id));
+    dispatch(getMovieDetailThunk(id));
   }, []);
   if (loading)
     return (
