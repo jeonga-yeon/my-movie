@@ -8,6 +8,7 @@ const Wrapper = styled.div`
   margin-right: 10px;
   border-radius: 1%;
   .overlay {
+    transition: all ease-in-out 0.5s;
     position: relative;
     box-sizing: border-box;
     padding: 5%;
@@ -16,6 +17,8 @@ const Wrapper = styled.div`
     h1 {
       margin: 0px;
       margin-bottom: 10px;
+      font-size: 24px;
+      font-weight: 600;
     }
     .overlay__genre {
       margin-right: 5px;
@@ -29,9 +32,22 @@ const Wrapper = styled.div`
     .overlay__info {
       position: absolute;
       bottom: 7%;
+      display: flex;
       .vote-average {
         color: yellow;
         margin-right: 3px;
+      }
+      .adult {
+        color: black;
+        font-weight: 600;
+        height: 18px;
+        width: 22px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 10px;
+        background-color: red;
+        border-radius: 10%;
       }
     }
   }
@@ -71,7 +87,11 @@ const TvCard = ({ tvShow, width }) => {
             <FontAwesomeIcon icon={faStar} className="vote-average" />
             {tvShow.vote_average}
           </span>
-          <span>{tvShow.adult ? "18" : null}</span>
+          {tvShow.adult ? (
+            <div className="adult">
+              <span>18</span>
+            </div>
+          ) : null}
         </div>
       </div>
     </Wrapper>

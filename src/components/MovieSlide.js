@@ -5,14 +5,17 @@ import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import MovieCard from "./MovieCard";
 
 const Wrapper = styled.div`
-  position: relative;
   display: flex;
   align-items: center;
   overflow-x: hidden;
   margin: 0px 100px;
   overflow-y: hidden;
   z-index: 1;
+  &:hover .btn {
+    opacity: 1;
+  }
   .btn {
+    opacity: 0;
     color: #ecf0f1;
     display: flex;
     justify-content: center;
@@ -41,11 +44,11 @@ const Slide = styled.div`
 `;
 
 const Prev = styled.div`
-  left: 0;
+  left: 3%;
 `;
 
 const Next = styled.div`
-  right: 0;
+  right: 3%;
 `;
 
 const MovieSlide = ({ movies }) => {
