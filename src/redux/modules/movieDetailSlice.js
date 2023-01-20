@@ -7,12 +7,29 @@ export const getMovieDetailThunk = createAsyncThunk(
   "movieDetail/getMovieDetailThunk",
   async (id, thunkAPI) => {
     try {
-      const movieDetailApi = await api.get(
+      const movieDetailApi = api.get(
         `/movie/${id}?api_key=${API_KEY}&language=en-US`
       );
 
-      const movieDetail = movieDetailApi.data;
-      return movieDetail;
+      const movieReviewsApi = api.get(
+        `/movie/${id}/reviews?api_key=${API_KEY}&language=en-US&page=1`
+      );
+
+      const movieRecommendationApi = api.get(
+        `/movie/${id}/recommendations?api_key=${API_KEY}&language=en-US&page=1`
+      );
+
+      const [movieDetail, movieReviews, movieRecommendation] =
+        await Promise.all([
+          movieDetailApi,
+          movieReviewsApi,
+          movieRecommendationApi,
+        ]);
+      return {
+        movieDetail: movieDetail.data,
+        movieReviews: movieReviews.data,
+        movieRecommendation: movieRecommendation.data,
+      };
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -21,6 +38,8 @@ export const getMovieDetailThunk = createAsyncThunk(
 
 let initialState = {
   movieDetail: {},
+  movieReviews: {},
+  movieRecommendation: {},
   loading: true,
   error: null,
 };
@@ -35,7 +54,9 @@ const movie = createSlice({
         state.loading = true;
       })
       .addCase(getMovieDetailThunk.fulfilled, (state, action) => {
-        state.movieDetail = action.payload;
+        state.movieDetail = action.payload.movieDetail;
+        state.movieReviews = action.payload.movieReviews;
+        state.movieRecommendation = action.payload.movieRecommendation;
         state.loading = false;
       })
       .addCase(getMovieDetailThunk.rejected, (state, action) => {

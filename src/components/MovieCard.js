@@ -67,7 +67,7 @@ const MovieCard = ({ movie, width }) => {
     <Wrapper
       onClick={() => navigate(`/movies/${movie.id}`)}
       style={{
-        height: "100%",
+        height: width * 0.7,
         width,
         backgroundImage:
           "url(" +
