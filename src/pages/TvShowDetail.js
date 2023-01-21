@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
@@ -8,6 +8,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { getTvDetailThunk } from "../redux/modules/tvDetailSlice";
+import TvCard from "../components/TvCard";
 
 const Loading = styled.div`
   width: 100%;
@@ -18,11 +19,73 @@ const Loading = styled.div`
   }
 `;
 
+const Container = styled.div`
+  .wrapper-bottom {
+    flex-direction: column;
+    align-items: center;
+    .all-reviews,
+    .all-related {
+      margin-top: 30px;
+    }
+    .all-related {
+      display: grid;
+      justify-content: center;
+      grid-template-columns: repeat(3, 300px);
+      gap: 20px;
+    }
+  }
+`;
+
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 100px;
   margin-bottom: 100px;
+  .related {
+    width: 1140px;
+    margin: 0px 15px;
+    display: flex;
+    .reviews,
+    .related-movies {
+      background-color: #f0f0f0;
+      color: #7f8c8d;
+      padding: 20px 40px;
+      &:hover {
+        cursor: pointer;
+      }
+      &:focus {
+        background-color: #fe4635;
+        color: white;
+      }
+    }
+    .reviews {
+      margin-right: 30px;
+    }
+  }
+  .all-reviews {
+    line-height: 30px;
+    width: 1140px;
+    height: auto;
+    padding: 40px;
+    border: 3px solid white;
+    box-sizing: border-box;
+    .review__result {
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid white;
+      .review__author {
+        font-size: 20px;
+      }
+    }
+    #last-review {
+      border: none;
+      padding-bottom: 0px;
+      margin-bottom: 0px;
+    }
+  }
+  .all-related {
+    width: 1140px;
+  }
 `;
 
 const Poster = styled.div`
@@ -127,10 +190,13 @@ const Detail = styled.div`
 const TvShowDetail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { tvDetail, loading } = useSelector((state) => state.tvShow);
+  const { tvDetail, tvReviews, tvRecommendation, loading } = useSelector(
+    (state) => state.tvShow
+  );
+  const [reviews, setReviews] = useState(true);
   useEffect(() => {
     dispatch(getTvDetailThunk(id));
-  }, []);
+  }, [id]);
   if (loading)
     return (
       <Loading>
@@ -143,58 +209,104 @@ const TvShowDetail = () => {
       </Loading>
     );
   return (
-    <Wrapper>
-      <Poster>
-        <img
-          src={`https://www.themoviedb.org/t/p/w300_and_h450_bestv2${tvDetail.poster_path}`}
-        />
-      </Poster>
-      <Detail>
-        <div className="genres">
-          {tvDetail.genres.map((genre, index) => (
-            <div className="genre__wrap" key={index}>
-              <span className="genre">{genre.name}</span>
-            </div>
-          ))}
-        </div>
-        <h1>{tvDetail.name}</h1>
-        <div className="tagline">{tvDetail.tagline}</div>
-        <div className="vote">
-          <div className="vote-average">
-            <FontAwesomeIcon icon={faStar} className="icon__average" />
-            {tvDetail.vote_average}
+    <Container>
+      <Wrapper>
+        <Poster>
+          <img
+            src={`https://www.themoviedb.org/t/p/w300_and_h450_bestv2${tvDetail.poster_path}`}
+          />
+        </Poster>
+        <Detail>
+          <div className="genres">
+            {tvDetail.genres.map((genre, index) => (
+              <div className="genre__wrap" key={index}>
+                <span className="genre">{genre.name}</span>
+              </div>
+            ))}
           </div>
-          <div className="popularity">
-            <FontAwesomeIcon icon={faUsers} className="icon__popularity" />
-            {tvDetail.popularity}
-          </div>
-          {tvDetail.adult ? (
-            <div className="adult">
-              <span>18</span>
+          <h1>{tvDetail.name}</h1>
+          <div className="tagline">{tvDetail.tagline}</div>
+          <div className="vote">
+            <div className="vote-average">
+              <FontAwesomeIcon icon={faStar} className="icon__average" />
+              {tvDetail.vote_average}
             </div>
-          ) : null}
+            <div className="popularity">
+              <FontAwesomeIcon icon={faUsers} className="icon__popularity" />
+              {tvDetail.popularity}
+            </div>
+            {tvDetail.adult ? (
+              <div className="adult">
+                <span>18</span>
+              </div>
+            ) : null}
+          </div>
+          <div className="overview">
+            <p>{tvDetail.overview}</p>
+          </div>
+          <div className="detail">
+            <ul>
+              <li>
+                <span className="detail-component">Episodes</span>
+                <span>{tvDetail.number_of_episodes}</span>
+              </li>
+              <li>
+                <span className="detail-component">Seasons</span>
+                <span>{tvDetail.number_of_seasons}</span>
+              </li>
+              <li>
+                <span className="detail-component">First Air Date</span>
+                <span>{tvDetail.first_air_date}</span>
+              </li>
+            </ul>
+          </div>
+        </Detail>
+      </Wrapper>
+      <Wrapper className="wrapper-bottom">
+        <div className="related">
+          <button
+            className="reviews"
+            onClick={() => setReviews(true)}
+            style={{
+              backgroundColor: reviews ? "#fe4635" : "#f0f0f0",
+              color: reviews ? "white" : "#7f8c8d",
+            }}
+          >
+            REVIEWS ({tvReviews.results.length})
+          </button>
+          <button
+            className="related-movies"
+            onClick={() => setReviews(false)}
+            style={{
+              backgroundColor: reviews ? "#f0f0f0" : "#fe4635",
+              color: reviews ? "#7f8c8d" : "white",
+            }}
+          >
+            RELATED MOVIES ({tvRecommendation.results.length})
+          </button>
         </div>
-        <div className="overview">
-          <p>{tvDetail.overview}</p>
-        </div>
-        <div className="detail">
-          <ul>
-            <li>
-              <span className="detail-component">Episodes</span>
-              <span>{tvDetail.number_of_episodes}</span>
-            </li>
-            <li>
-              <span className="detail-component">Seasons</span>
-              <span>{tvDetail.number_of_seasons}</span>
-            </li>
-            <li>
-              <span className="detail-component">First Air Date</span>
-              <span>{tvDetail.first_air_date}</span>
-            </li>
-          </ul>
-        </div>
-      </Detail>
-    </Wrapper>
+        {reviews ? (
+          <div className="all-reviews">
+            {tvReviews.results.map((review, index) => (
+              <div
+                key={index}
+                className="review__result"
+                id={index === tvReviews.results.length - 1 ? "last-review" : ""}
+              >
+                <div className="review__author">{review.author}</div>
+                <p className="review__content">{review.content}</p>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="all-related">
+            {tvRecommendation.results.map((tvShow, index) => (
+              <TvCard key={index} tvShow={tvShow} width={300} />
+            ))}
+          </div>
+        )}
+      </Wrapper>
+    </Container>
   );
 };
 

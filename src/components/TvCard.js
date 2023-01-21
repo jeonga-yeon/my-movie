@@ -67,7 +67,7 @@ const TvCard = ({ tvShow, width }) => {
     <Wrapper
       onClick={() => navigate(`/tvshows/${tvShow.id}`)}
       style={{
-        height: "100%",
+        height: width * 0.7,
         width,
         backgroundImage:
           "url(" +

@@ -7,12 +7,28 @@ export const getTvDetailThunk = createAsyncThunk(
   "tvDetail/getTvDetailThunk",
   async (id, thunkAPI) => {
     try {
-      const tvDetailApi = await api.get(
+      const tvDetailApi = api.get(
         `/tv/${id}?api_key=${API_KEY}&language=en-US`
       );
 
-      const tvDetail = tvDetailApi.data;
-      return tvDetail;
+      const tvReviewsApi = api.get(
+        `/tv/${id}/reviews?api_key=${API_KEY}&language=en-US&page=1`
+      );
+
+      const tvRecommendationApi = api.get(
+        `/tv/${id}/recommendations?api_key=${API_KEY}&language=en-US&page=1`
+      );
+
+      const [tvDetail, tvReviews, tvRecommendation] = await Promise.all([
+        tvDetailApi,
+        tvReviewsApi,
+        tvRecommendationApi,
+      ]);
+      return {
+        tvDetail: tvDetail.data,
+        tvReviews: tvReviews.data,
+        tvRecommendation: tvRecommendation.data,
+      };
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -21,6 +37,8 @@ export const getTvDetailThunk = createAsyncThunk(
 
 let initialState = {
   tvDetail: {},
+  tvReviews: {},
+  tvRecommendation: {},
   loading: true,
   error: null,
 };
@@ -35,7 +53,9 @@ const tvShow = createSlice({
         state.loading = true;
       })
       .addCase(getTvDetailThunk.fulfilled, (state, action) => {
-        state.tvDetail = action.payload;
+        state.tvDetail = action.payload.tvDetail;
+        state.tvReviews = action.payload.tvReviews;
+        state.tvRecommendation = action.payload.tvRecommendation;
         state.loading = false;
       })
       .addCase(getTvDetailThunk.rejected, (state, action) => {
