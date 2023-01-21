@@ -6,9 +6,15 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import ClipLoader from "react-spinners/ClipLoader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar, faUsers } from "@fortawesome/free-solid-svg-icons";
+import {
+  faStar,
+  faUsers,
+  faFilm,
+  faTimes,
+} from "@fortawesome/free-solid-svg-icons";
 import { getTvDetailThunk } from "../redux/modules/tvDetailSlice";
 import TvCard from "../components/TvCard";
+import YouTube from "react-youtube";
 
 const Loading = styled.div`
   width: 100%;
@@ -185,15 +191,66 @@ const Detail = styled.div`
       }
     }
   }
+  .trailer {
+    display: flex;
+    margin-top: 20px;
+    font-size: 18px;
+    &:hover {
+      cursor: pointer;
+    }
+    .trailer__icon {
+      color: #ff3838;
+      margin-right: 5px;
+    }
+    .trailer__span {
+      color: #ff3838;
+    }
+  }
+  .trailer__wrapper {
+    background-color: rgba(0, 0, 0, 0.6);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .trailer__popup {
+      position: fixed;
+      top: 50%;
+      margin-top: -20%;
+      z-index: 1000;
+      border: 1px solid #d1d8dd;
+      .trailer__back {
+        position: absolute;
+        top: -5%;
+        right: 0;
+        font-size: 20px;
+        &:hover {
+          cursor: pointer;
+          color: tomato;
+        }
+      }
+    }
+  }
 `;
 
 const TvShowDetail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { tvDetail, tvReviews, tvRecommendation, loading } = useSelector(
-    (state) => state.tvShow
-  );
+  const { tvDetail, tvReviews, tvRecommendation, tvTrailer, loading } =
+    useSelector((state) => state.tvShow);
   const [reviews, setReviews] = useState(true);
+  const [trailer, setTrailer] = useState(false);
+  const opts = {
+    height: "585",
+    width: "960",
+    playerVars: {
+      autoplay: 1,
+    },
+  };
   useEffect(() => {
     dispatch(getTvDetailThunk(id));
   }, [id]);
@@ -260,6 +317,22 @@ const TvShowDetail = () => {
               </li>
             </ul>
           </div>
+          <div className="trailer" onClick={() => setTrailer(true)}>
+            <FontAwesomeIcon icon={faFilm} className="trailer__icon" />
+            <span className="trailer__span">Watch Trailer</span>
+          </div>
+          {trailer ? (
+            <div className="trailer__wrapper">
+              <div className="trailer__popup">
+                <YouTube videoId={tvTrailer.results[0].key} opts={opts} />
+                <FontAwesomeIcon
+                  icon={faTimes}
+                  className="trailer__back"
+                  onClick={() => setTrailer(false)}
+                />
+              </div>
+            </div>
+          ) : null}
         </Detail>
       </Wrapper>
       <Wrapper className="wrapper-bottom">
