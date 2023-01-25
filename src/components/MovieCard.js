@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { faStar, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 
 const Wrapper = styled.div`
@@ -34,8 +34,16 @@ const Wrapper = styled.div`
       position: absolute;
       bottom: 7%;
       display: flex;
+      align-items: center;
       .vote-average {
         color: yellow;
+        margin-right: 3px;
+      }
+      span:nth-child(2) {
+        margin-left: 10px;
+      }
+      .popularity {
+        color: #bdc3c7;
         margin-right: 3px;
       }
       .adult {
@@ -89,6 +97,10 @@ const MovieCard = ({ movie, width }) => {
           <span>
             <FontAwesomeIcon icon={faStar} className="vote-average" />
             {movie.vote_average}
+          </span>
+          <span>
+            <FontAwesomeIcon icon={faUsers} className="popularity" />
+            {movie.popularity}
           </span>
           {movie.adult ? (
             <div className="adult">
