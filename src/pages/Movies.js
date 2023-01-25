@@ -25,6 +25,7 @@ const FilteredMovies = styled.div`
   grid-template-columns: repeat(2, 350px);
   gap: 30px;
   margin-left: 15px;
+  margin-bottom: 70px;
 `;
 
 const Movies = () => {

@@ -3,6 +3,7 @@ import { faStar, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -10,6 +11,9 @@ const Wrapper = styled.div`
   border-radius: 20px;
   position: relative;
   box-shadow: 12px 12px 10px 10px rgba(192, 57, 43, 0.3);
+  &:hover {
+    cursor: pointer;
+  }
   &::before {
     position: absolute;
     left: 0;
@@ -109,8 +113,10 @@ const Wrapper = styled.div`
 
 const MoviePageCard = ({ movie }) => {
   const { movieGenreList } = useSelector((state) => state.movies);
+  const navigate = useNavigate();
   return (
     <Wrapper
+      onClick={() => navigate(`/movies/${movie.id}`)}
       style={{
         backgroundImage:
           "url(" +

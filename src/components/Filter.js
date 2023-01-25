@@ -1,8 +1,13 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import { faArrowDown, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { sortMovies } from "../redux/modules/movieFilteringSlice";
+import { getGenreMovieThunk } from "../redux/modules/genreMovieSlide";
+import { useEffect } from "react";
 
 const Wrapper = styled.div`
   width: 300px;
@@ -23,13 +28,49 @@ const BeforeClick = styled.div`
 `;
 
 const AfterClick = styled.div`
+  padding-top: 10px;
   box-sizing: border-box;
-  height: 100px;
   border-top: 2px solid white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  span:first-child {
+    font-size: 20px;
+  }
+  .genres {
+    box-sizing: border-box;
+    margin-top: 10px;
+    padding: 10px;
+    span {
+      margin-right: 10px;
+      background-color: #dc143d;
+      display: inline-block;
+      font-size: 12px;
+      padding: 7px;
+      border-radius: 10px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
 `;
 
 const Filter = () => {
   const [click, setClick] = useState(false);
+  const { movieGenreList } = useSelector((state) => state.movies);
+  const { moviesByGenre } = useSelector((state) => state.genreMovies);
+  const dispatch = useDispatch();
+
+  const handleGenre = (genre) => {
+    dispatch(getGenreMovieThunk(genre));
+  };
+
+  useEffect(() => {
+    dispatch(sortMovies(moviesByGenre));
+  }, [moviesByGenre]);
+
   return (
     <Wrapper>
       <BeforeClick>
@@ -48,7 +89,18 @@ const Filter = () => {
           />
         )}
       </BeforeClick>
-      {click ? <AfterClick></AfterClick> : null}
+      {click ? (
+        <AfterClick>
+          <span>Genres</span>
+          <div className="genres">
+            {movieGenreList.map((genre, index) => (
+              <span key={index} onClick={() => handleGenre(genre.id)}>
+                {genre.name}
+              </span>
+            ))}
+          </div>
+        </AfterClick>
+      ) : null}
     </Wrapper>
   );
 };

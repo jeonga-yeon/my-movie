@@ -6,7 +6,6 @@ import styled from "styled-components";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { sortMovies } from "../redux/modules/movieFilteringSlice";
-import { useEffect } from "react";
 
 const Wrapper = styled.div`
   width: 300px;
