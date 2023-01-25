@@ -7,6 +7,8 @@ import Filter from "../components/Filter";
 import { useEffect } from "react";
 import { getMovieFilterThunk } from "../redux/modules/movieFilteringSlice";
 import MoviePageCard from "../components/MoviePageCard";
+import Loading from "../components/Loading";
+import { getMoivesThunk } from "../redux/modules/movieSlice";
 
 const Container = styled.div``;
 
@@ -30,15 +32,18 @@ const FilteredMovies = styled.div`
 
 const Movies = () => {
   const dispatch = useDispatch();
-  const { moviesByPopularity, sort } = useSelector(
+  const { moviesByPopularity, sort, loading } = useSelector(
     (state) => state.filteredMovies
   );
 
   useEffect(() => {
     dispatch(getMovieFilterThunk());
+    dispatch(getMoivesThunk());
   }, []);
 
   const movies = Object.keys(sort).length === 0 ? moviesByPopularity : sort;
+
+  if (loading) return <Loading loading={loading} />;
 
   return (
     <Container>

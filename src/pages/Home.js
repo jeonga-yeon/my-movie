@@ -3,20 +3,11 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Banner from "../components/Banner";
 import { getMoivesThunk } from "../redux/modules/movieSlice";
-import ClipLoader from "react-spinners/ClipLoader";
 import styled from "styled-components";
 import { getTvShowsThunk } from "../redux/modules/tvShowSlice";
 import MovieSlide from "../components/MovieSlide";
 import TvSlide from "../components/TvSlide";
-
-const Loading = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  .spinner {
-    margin-top: 200px;
-  }
-`;
+import Loading from "../components/Loading";
 
 const Wrapper = styled.div`
   h1 {
@@ -38,17 +29,7 @@ const Home = () => {
     dispatch(getMoivesThunk());
     dispatch(getTvShowsThunk());
   }, []);
-  if (loading)
-    return (
-      <Loading>
-        <ClipLoader
-          className="spinner"
-          color="white"
-          loading={loading}
-          size={150}
-        />
-      </Loading>
-    );
+  if (loading) return <Loading loading={loading} />;
   return (
     <Wrapper className="Wrapper">
       <Banner movie={popularMovies.results[0]} />

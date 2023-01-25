@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { getMovieDetailThunk } from "../redux/modules/movieDetailSlice";
-import ClipLoader from "react-spinners/ClipLoader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faStar,
@@ -15,15 +14,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import MovieCard from "../components/MovieCard";
 import YouTube from "react-youtube";
-
-const Loading = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  .spinner {
-    margin-top: 200px;
-  }
-`;
+import Loading from "../components/Loading";
 
 const Container = styled.div`
   .wrapper-bottom {
@@ -259,17 +250,7 @@ const MovieDetail = () => {
   useEffect(() => {
     dispatch(getMovieDetailThunk(id));
   }, [id]);
-  if (loading)
-    return (
-      <Loading>
-        <ClipLoader
-          className="spinner"
-          color="white"
-          loading={loading}
-          size={150}
-        />
-      </Loading>
-    );
+  if (loading) return <Loading loading={loading} />;
   return (
     <Container>
       <Wrapper>

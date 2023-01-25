@@ -5,6 +5,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import Loading from "./Loading";
 
 const Wrapper = styled.div`
   height: 550px;
@@ -112,8 +113,9 @@ const Wrapper = styled.div`
 `;
 
 const MoviePageCard = ({ movie }) => {
-  const { movieGenreList } = useSelector((state) => state.movies);
+  const { movieGenreList, loading } = useSelector((state) => state.movies);
   const navigate = useNavigate();
+  if (loading) return <Loading loading={loading} />;
   return (
     <Wrapper
       onClick={() => navigate(`/movies/${movie.id}`)}
