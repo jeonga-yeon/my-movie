@@ -3,6 +3,9 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getSearchThunk, sortSearch } from "../redux/modules/searchSlice";
 
 const Nav = styled.div`
   background-color: #141414;
@@ -59,7 +62,22 @@ const Nav = styled.div`
 `;
 
 const Navigation = () => {
+  const { searchMovie } = useSelector((state) => state.search);
   const navigate = useNavigate();
+  const [keyword, setKeyword] = useState("");
+  const dispatch = useDispatch();
+
+  const handleSearch = (event) => {
+    if (event.key === "Enter") {
+      if (keyword === "") {
+        return;
+      } else {
+        dispatch(getSearchThunk(keyword));
+        dispatch(sortSearch(searchMovie));
+        navigate(`/search?q=${keyword}`);
+      }
+    }
+  };
   return (
     <Nav>
       <Link to="/" className="logo">
@@ -70,7 +88,12 @@ const Navigation = () => {
         <li onClick={() => navigate("/tvshows")}>TV Shows</li>
       </ul>
       <div className="search">
-        <input type="text" placeholder="Search" />
+        <input
+          type="text"
+          placeholder="Search"
+          onKeyPress={handleSearch}
+          onChange={(event) => setKeyword(event.target.value)}
+        />
         <button>
           <FontAwesomeIcon className="search-icon" icon={faSearch} />
         </button>

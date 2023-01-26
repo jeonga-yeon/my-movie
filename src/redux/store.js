@@ -4,6 +4,7 @@ import genreTv from "./modules/genreTvSlice";
 import movie from "./modules/movieDetailSlice";
 import filteredMovies from "./modules/movieFilteringSlice";
 import movies from "./modules/movieSlice";
+import search from "./modules/searchSlice";
 import tvShow from "./modules/tvDetailSlice";
 import filteredTv from "./modules/tvFilteringSlice";
 import tvShows from "./modules/tvShowSlice";
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   filteredTv: filteredTv.reducer,
   genreMovies: genreMovies.reducer,
   genreTv: genreTv.reducer,
+  search: search.reducer,
 });
 
 let store = configureStore({
