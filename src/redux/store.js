@@ -1,9 +1,11 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import genreMovies from "./modules/genreMovieSlide";
+import genreTv from "./modules/genreTvSlice";
 import movie from "./modules/movieDetailSlice";
 import filteredMovies from "./modules/movieFilteringSlice";
 import movies from "./modules/movieSlice";
 import tvShow from "./modules/tvDetailSlice";
+import filteredTv from "./modules/tvFilteringSlice";
 import tvShows from "./modules/tvShowSlice";
 
 const rootReducer = combineReducers({
@@ -12,7 +14,9 @@ const rootReducer = combineReducers({
   movie: movie.reducer,
   tvShow: tvShow.reducer,
   filteredMovies: filteredMovies.reducer,
+  filteredTv: filteredTv.reducer,
   genreMovies: genreMovies.reducer,
+  genreTv: genreTv.reducer,
 });
 
 let store = configureStore({
