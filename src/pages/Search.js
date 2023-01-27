@@ -31,7 +31,6 @@ const Category = styled.div`
   color: white;
   margin-bottom: 20px;
   &:hover {
-    background-color: #192a56;
     cursor: pointer;
   }
   div {
@@ -61,8 +60,6 @@ const Search = () => {
     (state) => state.search
   );
 
-  console.log(query.get("q"));
-
   useEffect(() => {
     dispatch(getSearchThunk(query.get("q")));
     dispatch(getMoivesThunk());
@@ -81,6 +78,7 @@ const Search = () => {
               setTvClick(false);
               dispatch(sortSearch(searchMovie));
             }}
+            style={{ backgroundColor: movieClick ? "#192a56" : "" }}
           >
             <div>Movie</div>
           </Category>
@@ -90,6 +88,7 @@ const Search = () => {
               setMovieClick(false);
               dispatch(sortSearch(searchTv));
             }}
+            style={{ backgroundColor: tvClick ? "#192a56" : "" }}
           >
             <div>Tv Show</div>
           </Category>

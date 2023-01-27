@@ -43,11 +43,11 @@ const AfterClick = styled.div`
     padding: 10px;
     span {
       margin-right: 10px;
-      background-color: #dc143d;
+      background: linear-gradient(to right top, yellow, red);
       display: inline-block;
       font-size: 12px;
-      padding: 7px;
-      border-radius: 10px;
+      padding: 12px;
+      border-radius: 12px;
       font-weight: 600;
       margin-bottom: 10px;
       &:hover {
