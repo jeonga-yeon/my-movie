@@ -1,6 +1,6 @@
 {
   "name": "my-movie",
-  "homepage": "http://joyfuldev.github.io/my-movie",
+  "homepage": "http://joyfuldev.github.io",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
