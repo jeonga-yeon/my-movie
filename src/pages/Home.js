@@ -22,14 +22,14 @@ const Home = () => {
   const dispatch = useDispatch();
   const { popularMovies, topRatedMovies, upcomingMovies, loading } =
     useSelector((state) => state.movies);
-  const { popularTvShows, topRatedTvShows } = useSelector(
+  const { popularTvShows, topRatedTvShows, tvLoading } = useSelector(
     (state) => state.tvShows
   );
   useEffect(() => {
     dispatch(getMoivesThunk());
     dispatch(getTvShowsThunk());
   }, []);
-  if (loading) return <Loading loading={loading} />;
+  if (loading || tvLoading) return <Loading loading={loading} />;
   return (
     <Wrapper className="Wrapper">
       <Banner movie={popularMovies.results[0]} />

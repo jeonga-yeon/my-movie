@@ -40,7 +40,7 @@ let initialState = {
   popularTvShows: {},
   topRatedTvShows: {},
   tvGenreList: [],
-  loading: true,
+  tvLoading: true,
   error: null,
 };
 
@@ -51,16 +51,16 @@ const tvShows = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getTvShowsThunk.pending, (state) => {
-        state.loading = true;
+        state.tvLoading = true;
       })
       .addCase(getTvShowsThunk.fulfilled, (state, action) => {
         state.popularTvShows = action.payload.popularTvShows;
         state.topRatedTvShows = action.payload.topRatedTvShows;
         state.tvGenreList = action.payload.tvGenreList;
-        state.loading = false;
+        state.tvLoading = false;
       })
       .addCase(getTvShowsThunk.rejected, (state, action) => {
-        state.loading = false;
+        state.tvLoading = false;
         state.error = action.error;
       });
   },
