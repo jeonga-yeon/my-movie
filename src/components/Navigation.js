@@ -80,7 +80,7 @@ const Navigation = () => {
   };
   return (
     <Nav>
-      <Link to="/" className="logo">
+      <Link to="/my-movie" className="logo">
         My Movie
       </Link>
       <ul>
