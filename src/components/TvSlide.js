@@ -15,6 +15,7 @@ const Wrapper = styled.div`
     opacity: 1;
   }
   .btn {
+    height: 180px;
     opacity: 0;
     color: #ecf0f1;
     display: flex;
@@ -54,43 +55,43 @@ const Next = styled.div`
 const TvSlide = ({ tvShows }) => {
   const [scrollX, setScrollX] = useState(0);
   const [count, setCount] = useState(0);
-  const slideWidth = window.innerWidth - 260;
-  const cardWidth = slideWidth / 5;
+  const slideWidth = 1320;
+  const cardWidth = 254;
 
-  const handleBtnLeftClick = (e) => {
+  const handleBtnLeftClick = () => {
     setCount(0);
-    let x = scrollX + slideWidth + 50;
+    let x = scrollX + slideWidth;
     if (x > 0) {
       x = 0;
     }
     setScrollX(x);
   };
 
-  const handleBtnRightClick = (e) => {
+  const handleBtnRightClick = () => {
     if (count === 3) {
       return;
     }
-    let x = scrollX - slideWidth - 50;
+    let x = scrollX - slideWidth;
     setCount((current) => current + 1);
     setScrollX(x);
   };
   return (
     <Wrapper>
-      <Prev className="btn" style={{ height: cardWidth * 0.7 }}>
+      <Prev className="btn">
         <FontAwesomeIcon
           className="btn__icon"
           icon={faAngleLeft}
           onClick={handleBtnLeftClick}
         />
       </Prev>
-      <Next className="btn" style={{ height: cardWidth * 0.7 }}>
+      <Next className="btn">
         <FontAwesomeIcon
           className="btn__icon"
           icon={faAngleRight}
           onClick={handleBtnRightClick}
         />
       </Next>
-      <Carousel style={{ height: cardWidth * 0.7 + 20 }}>
+      <Carousel style={{ height: 235 }}>
         <Slide
           style={{
             marginLeft: scrollX,
@@ -98,7 +99,7 @@ const TvSlide = ({ tvShows }) => {
               tvShows.results.length * cardWidth +
               tvShows.results.length * 10 +
               100,
-            height: cardWidth * 0.7,
+            height: 180,
           }}
         >
           {tvShows.results.length > 0 &&
