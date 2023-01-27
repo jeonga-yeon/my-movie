@@ -73,7 +73,7 @@ const MovieCard = ({ movie, width }) => {
   const { movieGenreList } = useSelector((state) => state.movies);
   return (
     <Wrapper
-      onClick={() => navigate(`/movies/${movie.id}`)}
+      onClick={() => navigate(`/my-movie/movies/${movie.id}`)}
       style={{
         height: width * 0.7,
         width,

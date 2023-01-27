@@ -78,7 +78,13 @@ const Search = () => {
               setTvClick(false);
               dispatch(sortSearch(searchMovie));
             }}
-            style={{ backgroundColor: movieClick ? "#192a56" : "" }}
+            style={{
+              backgroundColor: movieClick
+                ? "#192a56"
+                : tvClick
+                ? ""
+                : "#192a56",
+            }}
           >
             <div>Movie</div>
           </Category>

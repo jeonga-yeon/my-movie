@@ -118,7 +118,7 @@ const TvPageCard = ({ tvShow }) => {
   if (loading) return <Loading loading={loading} />;
   return (
     <Wrapper
-      onClick={() => navigate(`/tvshows/${tvShow.id}`)}
+      onClick={() => navigate(`/my-movie/tvshows/${tvShow.id}`)}
       style={{
         backgroundImage:
           "url(" +

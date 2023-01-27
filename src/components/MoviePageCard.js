@@ -118,7 +118,7 @@ const MoviePageCard = ({ movie }) => {
   if (loading) return <Loading loading={loading} />;
   return (
     <Wrapper
-      onClick={() => navigate(`/movies/${movie.id}`)}
+      onClick={() => navigate(`/my-movie/movies/${movie.id}`)}
       style={{
         backgroundImage:
           "url(" +

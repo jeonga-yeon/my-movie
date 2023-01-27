@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import "./App.css";
 import Navigation from "./components/Navigation";
 import Home from "./pages/Home";
 import MovieDetail from "./pages/MovieDetail";
@@ -14,11 +13,11 @@ function App() {
       <Navigation />
       <Routes>
         <Route path="/my-movie" element={<Home />} />
-        <Route path="/movies" element={<Movies />} />
-        <Route path="/movies/:id" element={<MovieDetail />} />
-        <Route path="/tvshows/" element={<TvShows />} />
-        <Route path="/tvshows/:id" element={<TvShowDetail />} />
-        <Route path="/search" element={<Search />} />
+        <Route path="/my-movie/movies" element={<Movies />} />
+        <Route path="/my-movie/movies/:id" element={<MovieDetail />} />
+        <Route path="/my-movie/tvshows/" element={<TvShows />} />
+        <Route path="/my-movie/tvshows/:id" element={<TvShowDetail />} />
+        <Route path="/my-movie/search" element={<Search />} />
       </Routes>
     </div>
   );

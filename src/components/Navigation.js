@@ -74,7 +74,7 @@ const Navigation = () => {
       } else {
         dispatch(getSearchThunk(keyword));
         dispatch(sortSearch(searchMovie));
-        navigate(`/search?q=${keyword}`);
+        navigate(`/my-movie/search?q=${keyword}`);
       }
     }
   };
@@ -84,8 +84,8 @@ const Navigation = () => {
         My Movie
       </Link>
       <ul>
-        <li onClick={() => navigate("/movies")}>Movies</li>
-        <li onClick={() => navigate("/tvshows")}>TV Shows</li>
+        <li onClick={() => navigate("/my-movie/movies")}>Movies</li>
+        <li onClick={() => navigate("/my-movie/tvshows")}>TV Shows</li>
       </ul>
       <div className="search">
         <input

@@ -73,7 +73,7 @@ const TvCard = ({ tvShow, width }) => {
   const { tvGenreList } = useSelector((state) => state.tvShows);
   return (
     <Wrapper
-      onClick={() => navigate(`/tvshows/${tvShow.id}`)}
+      onClick={() => navigate(`/my-movie/tvshows/${tvShow.id}`)}
       style={{
         height: width * 0.7,
         width,

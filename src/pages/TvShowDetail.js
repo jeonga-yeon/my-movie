@@ -298,10 +298,13 @@ const TvShowDetail = () => {
               </li>
             </ul>
           </div>
-          <div className="trailer" onClick={() => setTrailer(true)}>
-            <FontAwesomeIcon icon={faFilm} className="trailer__icon" />
-            <span className="trailer__span">Watch Trailer</span>
-          </div>
+          {tvTrailer.results.length !== 0 ? (
+            <div className="trailer" onClick={() => setTrailer(true)}>
+              <FontAwesomeIcon icon={faFilm} className="trailer__icon" />
+              <span className="trailer__span">Watch Trailer</span>
+            </div>
+          ) : null}
+
           {trailer ? (
             <div className="trailer__wrapper">
               <div className="trailer__popup">
