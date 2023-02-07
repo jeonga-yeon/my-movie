@@ -1,70 +1,94 @@
-# Getting Started with Create React App
+# My Movie
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+영화 정보 사이트  
+https://jeonga-yeon.github.io/my-movie/
+<br />
+<br />
 
-## Available Scripts
+## 주요 기능
 
-In the project directory, you can run:
+✅ 메인 화면  
+배너에는 가장 인기 있는 영화의 포스터가 보여지고  
+각 카테고리별로 영화와 티비 쇼의 정보가 슬라이드로 보여진다.
+![moviemain](https://user-images.githubusercontent.com/76932302/217265239-14889760-964b-4091-a5b0-42f7c7c5c5de.gif)
 
-### `npm start`
+✅ 영화 및 티비 쇼 상세 페이지  
+상세 정보를 볼 수 있고 댓글과 관련 영화 및 티비쇼를 볼 수 있다.
+![detail1](https://user-images.githubusercontent.com/76932302/217268229-c93d17ad-0211-4178-87a1-3f8febc11833.gif)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+관련 영화를 누르면 상세 페이지로 넘어갈 수 있다.
+![detail2](https://user-images.githubusercontent.com/76932302/217269486-5009802f-7e56-42d7-b6b7-174587437e58.gif)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+✅ 영화 페이지  
+영화를 인기순, 날짜, 제목의 알파벳 순으로 정렬할 수 있다.  
+기본적으로 인기순으로 정렬되어 있다.
 
-### `npm test`
+![movie1](https://user-images.githubusercontent.com/76932302/217271462-dad3525b-d2b2-473c-ad2c-83f0e9a49a0f.gif)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+장르별로 필터링 할 수 있다.
 
-### `npm run build`
+![movie2](https://user-images.githubusercontent.com/76932302/217272662-468c85f3-ff86-4450-9d41-09eaccb41600.gif)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+각 영화의 카드를 누르면 상세 페이지로 이동한다.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![movie3](https://user-images.githubusercontent.com/76932302/217273441-251ed1c0-538c-4660-a659-712f17fceedc.gif)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+✅ 티비 쇼 페이지  
+영화 페이지와 같은 기능을 가지고 있다.
 
-### `npm run eject`
+![tvshow](https://user-images.githubusercontent.com/76932302/217275020-f938bcef-c3d1-4833-92dd-747faa800d7e.gif)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+✅ 영화 및 티비 쇼 검색  
+검색어를 입력하면 영화와 티비 쇼에서 각각 검색 결과를 얻을 수 있다.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![moviesearch](https://user-images.githubusercontent.com/76932302/217275954-5d7b41cb-8bfc-458c-911c-0379b7c6f746.gif)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 파일구조
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+    - src
+      - components
+        - Banner.js
+        - Filter.js
+        - Loading.js
+        - MovieCard.js
+        - MoviePageCard.js
+        - MovieSlide.js
+        - Navigation.js
+        - Sort.js
+        - TvCard.js
+        - TvFilter.js
+        - TvPageCard.js
+        - TvSlide.js
+        - TvSort.js
+      - pages
+        - Home.js
+        - MovieDetail.js
+        - Movies.js
+        - Search.js
+        - TvShowDetail.js
+        - TvShows.js
+      - redux
+        - modules
+          - genreMovieSlice.js
+          - genreTvSlice.js
+          - movieDetailSlice.js
+          - movieFilteringSlice.js
+          - movieSlice.js
+          - searchSlice.js
+          - tvDetailSlice.js
+          - tvFilteringSlice.js
+          - tvShowSlice.js
+        - api.js
+        - store.js
+      - App.js
+      - index.tsx
 
-## Learn More
+<br />
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 사용 기술
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+React, Redux, axios, styled-components
+```
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<br />
