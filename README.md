@@ -43,6 +43,43 @@ https://jeonga-yeon.github.io/my-movie/
 
 ![moviesearch](https://user-images.githubusercontent.com/76932302/217275954-5d7b41cb-8bfc-458c-911c-0379b7c6f746.gif)
 
+<br />
+
+## 문제 해결
+
+1. createSlice에서 reducer를 사용할 때 에러 발생
+
+   ```
+   export const sortMovies = (value) => {
+     return (dispatch) => {
+     dispatch(sortReducer(value));
+    };
+   };
+   ```
+
+   이렇게 sortReducer를 dispatch 하는 과정이 필요한데 그 과정을 생략하고
+
+   ```
+   export const { sortReducer } = filteredMovies.actions;
+   ```
+
+   sortReducer를 내보내기만 했던 게 원인
+
+   <br />
+
+2. 장르별 필터링 시 장르를 두 번 클릭해야 필터링 되는 문제
+
+   ```
+   useEffect(() => {
+    dispatch(sortMovies(moviesByGenre));
+   }, [moviesByGenre]);
+
+   ```
+
+   useEffect를 통해 moviesByGenre라는 변수가 변할 때마다 dispatch 되도록 하였다.
+
+<br />
+
 ## 파일구조
 
     - src
